@@ -13,6 +13,15 @@ export class Item {
 class ItemWrapper {
   constructor(protected item: Item) {}
 
+  static create(item: Item) {
+    switch (item.name) {
+      case 'Aged Brie':
+        return new AgedBrie(item);
+      default:
+        return new ItemWrapper(item);
+    }
+  }
+
   updateQuality() {
     if (this.item.name != 'Aged Brie' && this.item.name != 'Backstage passes to a TAFKAL80ETC concert') {
       if (this.item.quality > 0) {
@@ -63,6 +72,29 @@ class ItemWrapper {
     return this.item;
   }
 }
+
+/**
+ * AgedBrie class represents an "Aged Brie" item and is a subclass of ItemWrapper.
+ * It contains the logic for updating the quality and sellIn values of the "Aged Brie" item.
+ *
+ * @extends {ItemWrapper}
+ */
+class AgedBrie extends ItemWrapper {
+  /**
+   * Updates the quality and sellIn values of the "Aged Brie" item.
+   * The quality increases by 1 (or 2 if the sellIn value is negative) up to a maximum of 50,
+   * if we make these assumptions from the specification:
+   * Once the sell by date (sellIn value) has passed, Quality degrades twice as fast for regular items.
+   * Since "Aged Brie" behaves opposite to regular items, its quality increases twice as fast when the sellIn value is negative,
+   *
+   * The sellIn value decreases by 1.
+   */
+  updateQuality() {
+    this.item.sellIn--;
+    this.item.quality = Math.min(50, this.item.quality + (this.item.sellIn < 0 ? 2 : 1));
+  }
+}
+
 
 export class GildedRose {
   items: Array<Item>;
