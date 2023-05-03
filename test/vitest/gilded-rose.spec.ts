@@ -82,3 +82,39 @@ describe('When having legendary items "Sulfuras, Hand of Ragnaros" in Gilded Ros
     expect(updatedItems[0].quality).toEqual(80);
   });
 });
+
+describe('When adding a new "Backstage passes to a TAFKAL80ETC concert" item to Gilded Rose', () => {
+  describe('with initial SellIn value of 15 days and Quality value of 20', () => {
+    let gildedRose;
+
+    beforeEach(() => {
+      // ARRANGE
+      gildedRose = new GildedRose([new Item('Backstage passes to a TAFKAL80ETC concert', 15, 20)]);
+    });
+
+    describe('and one day passes', () => {
+      it('should increase the quality and decrease the SellIn date', () => {
+        // ACT
+        const updatedItems = gildedRose.updateQuality();
+
+        // ASSERT
+        expect(updatedItems[0].sellIn).toEqual(14);
+        expect(updatedItems[0].quality).toEqual(21);
+      });
+    });
+  });
+
+  describe('and there are 10 days left', () => {
+    it('should increase the quality by two and decrease the SellIn date', () => {
+      // ARRANGE
+      const gildedRose = new GildedRose([new Item('Backstage passes to a TAFKAL80ETC concert', 10, 20)]);
+
+      // ACT
+      const updatedItems = gildedRose.updateQuality();
+
+      // ASSERT
+      expect(updatedItems[0].sellIn).toEqual(9);
+      expect(updatedItems[0].quality).toEqual(22);
+    });
+  });
+});
