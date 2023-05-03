@@ -93,7 +93,7 @@ describe('When adding a new "Backstage passes to a TAFKAL80ETC concert" item to 
     });
 
     describe('and one day passes', () => {
-      it('should increase the quality and decrease the SellIn date', () => {
+      it('should increase the quality by 1 and decrease the SellIn date by 1', () => {
         // ACT
         const updatedItems = gildedRose.updateQuality();
 
@@ -105,7 +105,7 @@ describe('When adding a new "Backstage passes to a TAFKAL80ETC concert" item to 
   });
 
   describe('and there are 10 days left', () => {
-    it('should increase the quality by two and decrease the SellIn date', () => {
+    it('should increase the quality by two and decrease the SellIn date by 1', () => {
       // ARRANGE
       const gildedRose = new GildedRose([new Item('Backstage passes to a TAFKAL80ETC concert', 10, 20)]);
 
