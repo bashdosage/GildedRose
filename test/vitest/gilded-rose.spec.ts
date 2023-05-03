@@ -68,3 +68,17 @@ describe('When adding a new "Elixir of the Mongoose" item to Gilded Rose', () =>
     });
   });
 });
+
+describe('When having legendary items "Sulfuras, Hand of Ragnaros" in Gilded Rose', () => {
+  it('should not decrease in quality nor have to be sold', () => {
+    // ARRANGE
+    const gildedRose = new GildedRose([new Item('Sulfuras, Hand of Ragnaros', 0, 80)]);
+
+    // ACT
+    const updatedItems = gildedRose.updateQuality();
+
+    // ASSERT
+    expect(updatedItems[0].sellIn).toEqual(0);
+    expect(updatedItems[0].quality).toEqual(80);
+  });
+});
