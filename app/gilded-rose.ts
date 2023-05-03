@@ -104,7 +104,7 @@ export class GildedRose {
   }
 
   updateQuality() {
-    const wrappedItems = this.items.map((item) => new ItemWrapper(item));
+    const wrappedItems = this.items.map((item) => ItemWrapper.create(item));
     wrappedItems.forEach((wrappedItem) => wrappedItem.updateQuality());
     return this.items;
   }
