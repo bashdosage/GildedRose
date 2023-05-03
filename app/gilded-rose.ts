@@ -17,6 +17,8 @@ class ItemWrapper {
     switch (item.name) {
       case 'Aged Brie':
         return new AgedBrie(item);
+      case 'Sulfuras, Hand of Ragnaros':
+        return new Sulfuras(item);
       default:
         return new ItemWrapper(item);
     }
@@ -95,6 +97,21 @@ class AgedBrie extends ItemWrapper {
   }
 }
 
+/**
+ * Sulfuras class represents a "Sulfuras, Hand of Ragnaros" item and is a subclass of ItemWrapper.
+ * It contains the logic for updating the quality and sellIn values of the "Sulfuras, Hand of Ragnaros" item.
+ *
+ * @extends {ItemWrapper}
+ */
+class Sulfuras extends ItemWrapper {
+  /**
+   * Updates the quality and sellIn values of the "Sulfuras, Hand of Ragnaros" item.
+   * Since "Sulfuras" is a legendary item, its quality and sellIn values never change.
+   */
+  updateQuality() {
+    // do nothing
+  }
+}
 
 export class GildedRose {
   items: Array<Item>;
